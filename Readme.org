@@ -1,1 +1,101 @@
-To speak with org-mode
+Beware, this package is far from being finished. It still works only for two people and with git to configure yourself. 
+Future : server + automatic ssh ?
+
+
+
+* Overview
+
+Use the org-mode and org-roam features to easily chat.
+
+* Installation
+
+#+begin_src emacs-lisp
+  (use-package org-discuss
+    :straight (org-discuss
+               :type git
+               :host github
+               :repo "Cletip/org-discuss"))
+#+end_src
+
+Variables : 
+
+#+begin_src emacs-lisp
+  (setq org-discuss-directory "/path/to/the/directory" ;; where is the directory of note ?
+        org-discuss-discussion-directory "org-discuss" ;; you want maybe a special directory to the discussion
+        org-discuss-pseudo "Cletip" ;; your pseudo
+        org-discuss-capture-key "N" ;; the key to capture a new things in org-capture
+        )
+#+end_src
+
+Then, 4 cases :  
+
+** You want use this in a directory which has nothing to do with org-roam
+
+- Create the directory where go the discussion
+- Create .dir-locals.el in with this (to update the database automatically): 
+  #+begin_src emacs-lisp
+    ((nil . ((eval . (setq-local
+                      org-roam-directory (expand-file-name (locate-dominating-file
+                                                            default-directory ".dir-locals.el"))))
+             (eval . (setq-local
+                      org-roam-db-location (expand-file-name "org-roam.db"
+                                                             org-roam-directory))))))
+  #+end_src
+- use the function in [[*Functionalities][Functionalities]]
+
+Note that as long as you are in the org-discuss-directory, you will not be able to use the org-roam functionality for your original database (if you already use org-roam)
+
+** You want that the discussion is in the same org-roam directory
+
+Not implemented yet
+It is necessary to make the queries with a certain tag on the notes ?
+
+** You want another directory for the discussion
+
+Not implemented yet
+
+
+So, [[https://www.orgroam.com/manual.html#How-do-I-have-more-than-one-Org_002droam-directory_003f][Refer to this]], You want that the directory of the discussion is not in the same org-roam directory.
+
+** You don't really use org-roam
+
+Not implemented yet
+Juste create a directory, and configure
+
+#+begin_src emacs-lisp
+  (setq org-discuss-directory "/path/to/the/directory") 
+  (setq org-discuss-discussion-directory "")
+#+end_src
+
+
+
+* Principe
+
+** Principle of operation 
+
+1. A file is linked to a question/topic
+2. A heading corresponds to a message/answer
+3. Answers are in chronological order: to answer, create a heading above the last heading (easier to answer)
+4. Each heading has a tag to know who wrote the message
+5. You have to quote the answers of the others so that everything is clear!
+6. Don't hesitate to make links between files.
+
+** Why use this ? 
+
+- basic message system with headings
+- possibility to modify at will
+
+
+* Functionalities
+
+- org-discuss-find-subject
+  Find one of the questions/subject. Correspond to the org-roam-node-find
+- org-discuss-insert-subject
+  Find one of the questions/subject. Correspond org-roam-node-insert
+- org-discuss-answer-current-heading
+  Create a new answer for the question at point
+- org-discuss-function-to-quote-a-message
+  Very useful : when a region is used, allows to quote this region in order to answer to it.
+- org-discuss-go-to-last-answer-of-subtree
+  Find and take to the most recent answer
+- org-discuss-db-sync
