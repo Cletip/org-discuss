@@ -10,7 +10,7 @@ Use the org-mode and org-roam features to easily chat.
 * Installation
 
 #+begin_src emacs-lisp
-  (use-package org-discuss
+    (use-package org-discuss
     :straight (org-discuss
                :type git
                :host github
@@ -25,6 +25,12 @@ Variables : 
         org-discuss-pseudo "Cletip" ;; your pseudo
         org-discuss-capture-key "N" ;; the key to capture a new things in org-capture
         )
+#+end_src
+
+You maybe want to add this too : 
+
+#+begin_src emacs-lisp
+  (org-discuss-db-sync)
 #+end_src
 
 Then, 4 cases :  

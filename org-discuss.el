@@ -154,12 +154,13 @@
   (outline-previous-heading)
   )
 
-(add-to-list 'org-roam-capture-templates
-             `(,org-discuss-capture-key
-	      "Org-discuss new subject" plain ,(concat (format "* %s"
-             org-discuss-title) "\n%?")
-              :target (file+head ,(format "%s/%s/${slug}.org" org-discuss-directory org-discuss-discussion-directory)
-				 "#+title: ${title}\n")
-              :unnarrowed t))
+(with-eval-after-load 'org-roam
+  (add-to-list 'org-roam-capture-templates
+               `(,org-discuss-capture-key
+		 "Org-discuss new subject" plain ,(concat (format "* %s"
+								  org-discuss-title) "\n%?")
+		 :target (file+head ,(format "%s/%s/${slug}.org" org-discuss-directory org-discuss-discussion-directory)
+				    "#+title: ${title}\n")
+		 :unnarrowed t)))
 
 (provide 'org-discuss)
