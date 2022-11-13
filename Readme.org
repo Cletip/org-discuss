@@ -41,6 +41,7 @@ Then, 4 cases : 
                       org-roam-db-location (expand-file-name "org-roam.db"
                                                              org-roam-directory))))))
   #+end_src
+- configure variables
 - use the function in [[*Functionalities][Functionalities]]
 
 Note that as long as you are in the org-discuss-directory, you will not be able to use the org-roam functionality for your original database (if you already use org-roam)
@@ -91,7 +92,7 @@ Juste create a directory, and configure
 - org-discuss-find-subject
   Find one of the questions/subject. Correspond to the org-roam-node-find
 - org-discuss-insert-subject
-  Find one of the questions/subject. Correspond org-roam-node-insert
+  Find one of the questions/subject. Correspond to org-roam-node-insert
 - org-discuss-answer-current-heading
   Create a new answer for the question at point
 - org-discuss-function-to-quote-a-message
